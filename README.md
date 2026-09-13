@@ -8,6 +8,94 @@ A full-stack video library built with React and Django REST Framework. Users can
 backend/    Django project, REST API, database configuration, media processing
 frontend/   React application
 ```
+streamvision/
+│
+├── backend/
+│   │
+│   ├── media/
+│   │   ├── frames/
+│   │   ├── hls/
+│   │   ├── sample/
+│   │   └── thumbnails/
+│   │
+│   ├── MyOtt/
+│   │   ├── __pycache__/
+│   │   ├── __init__.py
+│   │   ├── asgi.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   │
+│   ├── VideoStreaming/
+│   │   ├── __pycache__/
+│   │   ├── migrations/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── serializers.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   │
+│   ├── db.sqlite3
+│   ├── manage.py
+│   └── requirements.txt
+│
+├── frontend/
+│   │
+│   ├── build/
+│   ├── node_modules/
+│   ├── public/
+│   │
+│   ├── src/
+│   │   ├── assets/
+│   │   │
+│   │   ├── components/
+│   │   │   ├── About/
+│   │   │   │   ├── About.css
+│   │   │   │   └── About.js
+│   │   │   │
+│   │   │   ├── Footer/
+│   │   │   │   ├── Footer.css
+│   │   │   │   └── Footer.js
+│   │   │   │
+│   │   │   ├── Header/
+│   │   │   │   ├── Header.css
+│   │   │   │   └── Header.js
+│   │   │   │
+│   │   │   ├── Login/
+│   │   │   │   ├── Login.css
+│   │   │   │   └── Login.js
+│   │   │   │
+│   │   │   ├── Sam/
+│   │   │   │   ├── Sam.css
+│   │   │   │   └── Sam.js
+│   │   │   │
+│   │   │   ├── Videolist/
+│   │   │   │   ├── Videolist.css
+│   │   │   │   └── Videolist.js
+│   │   │   │
+│   │   │   └── VideoUpload/
+│   │   │       ├── VideoUpload.css
+│   │   │       └── VideoUpload.js
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Home/
+│   │   │   │   ├── Home.css
+│   │   │   │   └── Home.js
+│   │   │   │
+│   │   │   └── VideoDetail/
+│   │   │       ├── VideoDetail.css
+│   │   │       └── VideoDetail.js
+│   │   │
+│   │   └── services/
+│   │
+│   ├── package.json
+│   └── package-lock.json
+│
+├── .gitignore
+└── README.md
 
 ## Features
 
