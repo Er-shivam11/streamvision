@@ -1,13 +1,10 @@
-# OTT Video Streaming
+# OTT Video Streaming — StreamVision
 
-A full-stack video library built with React and Django REST Framework. Users can browse uploaded videos, search the library, open video details, log in, and upload new video files.
+A full-stack OTT video streaming platform built with **React** and **Django REST Framework**.
+
+Users can browse videos, search the library, view video details, authenticate, and upload new videos. Uploaded videos are processed with **FFmpeg** to generate thumbnails and adaptive HLS streams in multiple resolutions.
 
 ## Project Structure
-
-```text
-backend/    Django project, REST API, database configuration, media processing
-frontend/   React application
-```
 
 ```text
 streamvision/
@@ -17,11 +14,21 @@ streamvision/
 │   ├── media/
 │   │   ├── frames/
 │   │   ├── hls/
+│   │   │   └── <video_id>/
+│   │   │       ├── master.m3u8
+│   │   │       ├── 360p.m3u8
+│   │   │       ├── 720p.m3u8
+│   │   │       ├── 1080p.m3u8
+│   │   │       ├── 360p0.ts
+│   │   │       ├── 360p1.ts
+│   │   │       ├── 720p0.ts
+│   │   │       ├── 720p1.ts
+│   │   │       ├── 1080p0.ts
+│   │   │       └── 1080p1.ts
 │   │   ├── sample/
 │   │   └── thumbnails/
 │   │
 │   ├── MyOtt/
-│   │   ├── __pycache__/
 │   │   ├── __init__.py
 │   │   ├── asgi.py
 │   │   ├── settings.py
@@ -29,7 +36,6 @@ streamvision/
 │   │   └── wsgi.py
 │   │
 │   ├── VideoStreaming/
-│   │   ├── __pycache__/
 │   │   ├── migrations/
 │   │   ├── __init__.py
 │   │   ├── admin.py
@@ -40,14 +46,11 @@ streamvision/
 │   │   ├── urls.py
 │   │   └── views.py
 │   │
-│   ├── db.sqlite3
 │   ├── manage.py
 │   └── requirements.txt
 │
 ├── frontend/
 │   │
-│   ├── build/
-│   ├── node_modules/
 │   ├── public/
 │   │
 │   ├── src/
@@ -96,68 +99,185 @@ streamvision/
 └── README.md
 ```
 
+### Generated / Local Files
 
+The following files and directories should **not** be committed to Git:
+
+```text
+backend/
+├── media/
+├── __pycache__/
+└── db.sqlite3
+
+frontend/
+├── node_modules/
+└── build/
+
+venv/
+.env
+```
+
+These are generated locally or contain environment-specific data.
+
+---
 
 ## Features
 
-- Video library with featured and recently added videos
-- Search by video title
-- Video detail pages with playback and related videos
-- Drag-and-drop video upload with title and description
-- Login endpoint backed by Django authentication
-- Automatic thumbnail generation with `ffmpeg`
-- HLS output in 360p, 720p, and 1080p
-- Django admin and REST API
+* Video library with featured and recently added videos
+* Search videos by title
+* Video detail pages
+* Adaptive HLS video playback
+* HLS streaming in 360p, 720p, and 1080p
+* Drag-and-drop video upload
+* Video title and description support
+* Django authentication
+* Automatic thumbnail generation using FFmpeg
+* Django Admin
+* REST API
+* MySQL database
+* React frontend
+* Django backend
+
+---
+
+## Technology Stack
+
+### Frontend
+
+* React
+* React Router
+* CSS
+* JavaScript
+* npm
+
+### Backend
+
+* Python
+* Django
+* Django REST Framework
+* MySQL
+* FFmpeg
+
+### Video Streaming
+
+* HTTP Live Streaming (HLS)
+* `.m3u8` playlists
+* `.ts` video segments
+* Adaptive bitrate streaming
+
+---
 
 ## Requirements
 
-- Python 3.10 or newer
-- Node.js and npm
-- MySQL Server
-- `ffmpeg` available on the system `PATH`
+Make sure the following are installed:
 
-The backend dependencies are listed in [backend/requirements.txt](backend/requirements.txt). The frontend dependencies are listed in [frontend/package.json](frontend/package.json).
+* Python 3.10+
+* Node.js
+* npm
+* MySQL Server
+* FFmpeg
+
+FFmpeg must be available from the system `PATH`.
+
+Verify FFmpeg:
+
+```powershell
+ffmpeg -version
+```
+
+Backend dependencies:
+
+```text
+backend/requirements.txt
+```
+
+Frontend dependencies:
+
+```text
+frontend/package.json
+```
+
+---
 
 ## Backend Setup
 
-The current Django settings use MySQL, not the checked-in SQLite database file.
+### 1. Create Virtual Environment
 
-Create a MySQL database named `ott_video_streaming`, then configure the credentials in `backend/MyOtt/settings.py` if your local MySQL setup differs from the defaults:
-
-```python
-DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.mysql',
-		'NAME': 'ott_video_streaming',
-		'USER': 'root',
-		'PASSWORD': '',
-		'HOST': 'localhost',
-		'PORT': '3306',
-	}
-}
-```
-
-From the repository root, create and activate a virtual environment and install the dependencies:
+From the project root:
 
 ```powershell
 python -m venv venv
+```
+
+Activate it:
+
+```powershell
 .\venv\Scripts\Activate.ps1
+```
+
+### 2. Install Dependencies
+
+```powershell
 pip install -r backend\requirements.txt
 ```
 
-Run migrations and start the API:
+### 3. Configure MySQL
+
+Create a MySQL database:
+
+```sql
+CREATE DATABASE ott_video_streaming;
+```
+
+Configure the database in:
+
+```text
+backend/MyOtt/settings.py
+```
+
+Example:
+
+```python
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "ott_video_streaming",
+        "USER": "root",
+        "PASSWORD": "",
+        "HOST": "localhost",
+        "PORT": "3306",
+    }
+}
+```
+
+Update the credentials according to your local MySQL configuration.
+
+### 4. Run Migrations
 
 ```powershell
 cd backend
 python manage.py migrate
+```
+
+### 5. Start Django
+
+```powershell
 python manage.py runserver
 ```
 
-The backend runs at `http://localhost:8000`.
+Backend:
+
+```text
+http://localhost:8000
+```
+
+---
 
 ## Frontend Setup
 
-In a second terminal:
+Open a second terminal.
+
+From the project root:
 
 ```powershell
 cd frontend
@@ -165,53 +285,280 @@ npm install
 npm start
 ```
 
-The frontend runs at `http://localhost:3000` and expects the backend at `http://localhost:8000`.
+Frontend:
+
+```text
+http://localhost:3000
+```
+
+The React application expects the Django backend to be available at:
+
+```text
+http://localhost:8000
+```
+
+---
 
 ## Frontend Routes
 
-| Route | Purpose |
-| --- | --- |
-| `/` | Home page |
-| `/VideoList` | Video library |
-| `/video/:id` | Video details and playback |
-| `/VideoUpload` | Upload a video |
-| `/login` | Login form |
-| `/about` | About page |
+| Route          | Purpose                    |
+| -------------- | -------------------------- |
+| `/`            | Home page                  |
+| `/VideoList`   | Video library              |
+| `/video/:id`   | Video details and playback |
+| `/VideoUpload` | Upload a video             |
+| `/login`       | Login                      |
+| `/about`       | About page                 |
+
+---
 
 ## API Endpoints
 
-The API is prefixed with `/api/`:
+The API is prefixed with `/api/`.
 
-| Method | Endpoint | Purpose |
-| --- | --- | --- |
-| `POST` | `/api/login/` | Authenticate a Django user |
-| `GET` | `/api/media/` | List media files |
-| `POST` | `/api/media/` | Upload a media file |
-| `GET` | `/api/media/<id>/` | Get one media file |
-| `PUT/PATCH` | `/api/media/<id>/` | Update a media file |
-| `DELETE` | `/api/media/<id>/` | Delete a media file |
+| Method      | Endpoint           | Purpose                    |
+| ----------- | ------------------ | -------------------------- |
+| `POST`      | `/api/login/`      | Authenticate a Django user |
+| `GET`       | `/api/media/`      | List media files           |
+| `POST`      | `/api/media/`      | Upload a media file        |
+| `GET`       | `/api/media/<id>/` | Get a media file           |
+| `PUT/PATCH` | `/api/media/<id>/` | Update a media file        |
+| `DELETE`    | `/api/media/<id>/` | Delete a media file        |
 
-Uploaded videos are stored under `backend/media/sample/`. During upload, the backend invokes `ffmpeg` to create a thumbnail and HLS files under `backend/media/hls/<id>/`.
+---
+
+## Video Processing
+
+When a user uploads a video, the backend processes it using FFmpeg.
+
+The processing pipeline is approximately:
+
+```text
+Video Upload
+     │
+     ▼
+Django REST API
+     │
+     ▼
+Save Original Video
+     │
+     ├──────────────► Generate Thumbnail
+     │
+     ▼
+FFmpeg Processing
+     │
+     ├──────────────► 360p HLS
+     │
+     ├──────────────► 720p HLS
+     │
+     └──────────────► 1080p HLS
+                         │
+                         ▼
+                    master.m3u8
+                         │
+              ┌──────────┼──────────┐
+              ▼          ▼          ▼
+          360p.m3u8  720p.m3u8  1080p.m3u8
+              │          │          │
+              ▼          ▼          ▼
+           .ts files  .ts files  .ts files
+```
+
+Example HLS output:
+
+```text
+backend/media/hls/3/
+
+├── master.m3u8
+├── 360p.m3u8
+├── 360p0.ts
+├── 360p1.ts
+├── 720p.m3u8
+├── 720p0.ts
+├── 720p1.ts
+├── 1080p.m3u8
+├── 1080p0.ts
+└── 1080p1.ts
+```
+
+The frontend requests:
+
+```text
+/hls/3/master.m3u8
+```
+
+The HLS player then follows the master playlist to the appropriate resolution playlist and its `.ts` segments.
+
+---
+
+## Media Storage
+
+Uploaded source videos:
+
+```text
+backend/media/sample/
+```
+
+Generated thumbnails:
+
+```text
+backend/media/thumbnails/
+```
+
+Generated HLS files:
+
+```text
+backend/media/hls/<video_id>/
+```
+
+Generated video frames:
+
+```text
+backend/media/frames/
+```
+
+These generated media files should generally remain outside Git.
+
+---
 
 ## Useful Commands
 
-Backend tests:
+### Backend
+
+Run migrations:
 
 ```powershell
 cd backend
+python manage.py migrate
+```
+
+Start development server:
+
+```powershell
+python manage.py runserver
+```
+
+Run tests:
+
+```powershell
 python manage.py test
 ```
 
-Frontend production build:
+Create Django superuser:
+
+```powershell
+python manage.py createsuperuser
+```
+
+### Frontend
+
+Install dependencies:
 
 ```powershell
 cd frontend
+npm install
+```
+
+Start development server:
+
+```powershell
+npm start
+```
+
+Create production build:
+
+```powershell
 npm run build
 ```
 
+---
+
 ## Configuration Notes
 
-- `DEBUG` is enabled and all hosts/CORS origins are currently allowed. These settings should be restricted before production deployment.
-- The frontend uses the hard-coded API URL `http://localhost:8000` in several components.
-- `ffmpeg` is required for video uploads to finish processing.
-- The requirements file pins Django 4.2, while the settings file was generated from a Django 5.1 project. Keep those versions aligned when changing the environment.
+### Development Configuration
+
+The current development configuration allows:
+
+* `DEBUG=True`
+* Broad `ALLOWED_HOSTS`
+* Development CORS origins
+* Localhost frontend/backend URLs
+
+These settings should be restricted before production deployment.
+
+### API URL
+
+The frontend currently uses:
+
+```text
+http://localhost:8000
+```
+
+for backend API requests.
+
+For production, this should be moved to an environment-based configuration.
+
+### FFmpeg
+
+FFmpeg is required for video processing.
+
+If FFmpeg is not available on the system `PATH`, video upload processing will fail.
+
+### Django Version
+
+Make sure the Django version in:
+
+```text
+backend/requirements.txt
+```
+
+matches the version used by the project configuration.
+
+---
+
+## Development Architecture
+
+```text
+                    ┌─────────────────────┐
+                    │     React Client    │
+                    │    localhost:3000    │
+                    └──────────┬──────────┘
+                               │
+                         HTTP / REST
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │   Django REST API   │
+                    │    localhost:8000   │
+                    └──────────┬──────────┘
+                               │
+                  ┌────────────┼────────────┐
+                  │            │            │
+                  ▼            ▼            ▼
+              MySQL DB      FFmpeg       Media
+                            Processing    Storage
+                               │
+                               ▼
+                         HLS Streaming
+                               │
+                               ▼
+                    master.m3u8 + .ts files
+```
+
+---
+
+## Project Goal
+
+StreamVision demonstrates a full-stack OTT video platform with:
+
+* REST API development
+* React frontend development
+* User authentication
+* Video upload handling
+* FFmpeg-based media processing
+* Adaptive HLS streaming
+* Multi-resolution video delivery
+* MySQL persistence
+* Django administration
+
+The project is designed to demonstrate practical backend, frontend, API, and video-streaming concepts in a single application.
