@@ -1,0 +1,93 @@
+.about-section {
+    padding: 50px 20px; /* Padding around the section */
+    background-color: #f2f2f2; /* Light background color */
+    text-align: center; /* Center align text */
+  }
+  
+  .about-title {
+    font-size: 36px; /* Title size */
+    color: #333; /* Title color */
+    margin-bottom: 20px; /* Space below title */
+  }
+  
+  .about-description {
+    font-size: 18px; /* Description size */
+    color: #555; /* Description color */
+    margin-bottom: 40px; /* Space below description */
+    line-height: 1.5; /* Line height for readability */
+    max-width: 800px; /* Max width for the description */
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto; /* Center horizontally */
+  }
+  
+  .card-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  }
+  
+  .card {
+    background-color: #fff; /* Card background color */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow for 3D effect */
+    margin: 20px; /* Margin around cards */
+    width: 300px; /* Fixed card width */
+    perspective: 1000px; /* Perspective for 3D effect */
+    transition: transform 0.3s; /* Transition for hover effect */
+  }
+  
+  .card:hover {
+    transform: translateY(-10px) rotateY(5deg); /* Slight lift and rotation on hover */
+  }
+  
+  .card-image img {
+    width: 100%; /* Responsive image */
+    border-top-left-radius: 15px; /* Rounded corners for image */
+    border-top-right-radius: 15px; /* Rounded corners for image */
+  }
+  
+  .card-content {
+    padding: 20px; /* Padding inside the card */
+  }
+  
+  .member-name {
+    font-size: 20px; /* Member name size */
+    color: #333; /* Member name color */
+    margin: 10px 0; /* Space above and below name */
+  }
+  
+  .member-role {
+    font-size: 16px; /* Role size */
+    color: #777; /* Role color */
+  }
+  
+  .member-description {
+    font-size: 14px; /* Description size */
+    color: #555; /* Description color */
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 768px) {
+    .card-container {
+      flex-direction: column; /* Stack cards vertically on smaller screens */
+    }
+  
+    .card {
+      width: 90%; /* Adjust card width for smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .about-title {
+      font-size: 28px; /* Smaller title size for mobile */
+    }
+  
+    .about-description {
+      font-size: 16px; /* Smaller description size for mobile */
+    }
+  
+    .member-name {
+      font-size: 18px; /* Smaller name size */
+    }
+  }
+  

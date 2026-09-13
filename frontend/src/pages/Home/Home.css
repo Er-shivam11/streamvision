@@ -1,0 +1,299 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+.ott-home {
+    --bg-void: #0b0f14;
+    --bg-panel: #121821;
+    --line: rgba(255, 255, 255, 0.08);
+    --text-primary: #f5f3ee;
+    --text-muted: #8b93a1;
+    --accent-amber: #ff9d2f;
+    --accent-blue: #3aa9ff;
+    --font-display: 'Archivo', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    background: var(--bg-void);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 640px;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1s ease-in-out;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(11, 15, 20, 0.55) 0%, rgba(11, 15, 20, 0.75) 55%, var(--bg-void) 100%),
+        linear-gradient(90deg, rgba(11, 15, 20, 0.85) 0%, rgba(11, 15, 20, 0.2) 55%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 620px;
+    padding: 0 6vw;
+}
+
+.hero-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 3.4rem;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
+}
+
+.hero-subtitle {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 0 32px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 6px;
+    padding: 14px 26px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: var(--accent-amber);
+    color: #1a1002;
+}
+
+.btn-primary:hover {
+    background: #ffb257;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border-color: var(--line);
+}
+
+.btn-secondary:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.scroll-cue {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.scroll-cue span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid var(--text-muted);
+    border-bottom: 2px solid var(--text-muted);
+    transform: rotate(45deg);
+    animation: bob 1.8s infinite;
+}
+
+@keyframes bob {
+    0%, 100% { transform: translateY(0) rotate(45deg); opacity: 0.6; }
+    50% { transform: translateY(8px) rotate(45deg); opacity: 1; }
+}
+
+/* ---------- SHARED SECTION HEADING ---------- */
+.section-heading {
+    padding: 0 6vw;
+    margin-bottom: 32px;
+}
+
+.section-heading h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2rem;
+    margin: 0 0 8px;
+}
+
+.section-heading p {
+    color: var(--text-muted);
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* ---------- TRENDING ROW ---------- */
+.trending-row {
+    padding: 96px 0 80px;
+}
+
+.trending-scroll {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    padding: 4px 6vw 12px;
+    scroll-snap-type: x proximity;
+}
+
+.trending-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.trending-scroll::-webkit-scrollbar-thumb {
+    background: var(--line);
+    border-radius: 3px;
+}
+
+.trending-card {
+    flex: 0 0 220px;
+    scroll-snap-align: start;
+    text-decoration: none;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+.trending-thumb {
+    position: relative;
+    height: 130px;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--bg-panel);
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.trending-card:hover .trending-thumb {
+    transform: scale(1.04);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.play-icon {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 14px;
+    border-color: transparent transparent transparent rgba(255, 255, 255, 0.85);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.trending-card:hover .play-icon {
+    opacity: 1;
+}
+
+.trending-card h4 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 10px 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ---------- PERKS ---------- */
+.perks {
+    padding: 0 0 88px;
+}
+
+.perks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 0 6vw;
+}
+
+.perk-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 32px 28px;
+}
+
+.perk-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    margin: 0 0 10px;
+}
+
+.perk-card p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* ---------- CLOSING CTA ---------- */
+.cta-banner {
+    text-align: center;
+    padding: 100px 6vw;
+}
+
+.cta-banner h2 {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    margin: 0 0 12px;
+}
+
+.cta-banner p {
+    color: var(--text-muted);
+    margin: 0 0 28px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 1024px) {
+    .perks-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.3rem;
+    }
+    .hero-content {
+        max-width: 100%;
+    }
+    .perks-grid {
+        grid-template-columns: 1fr;
+    }
+    .trending-card {
+        flex: 0 0 170px;
+    }
+    .trending-thumb {
+        height: 96px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-cue span {
+        animation: none;
+    }
+}

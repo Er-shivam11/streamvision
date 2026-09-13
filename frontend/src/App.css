@@ -1,0 +1,61 @@
+/* App.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+  /* Styles for devices with a width of 1200px or less */
+  .app-container {
+    flex-direction: column; /* Stack elements vertically */
+  }
+
+  h1 {
+    font-size: 24px; /* Smaller font size for headers */
+  }
+}
+
+@media (max-width: 768px) {
+  /* Styles for devices with a width of 768px or less */
+  .app-container {
+    padding: 10px; /* Add some padding */
+  }
+
+  h1 {
+    font-size: 20px; /* Even smaller font size */
+  }
+
+  h2 {
+    font-size: 18px; /* Adjust h2 size */
+  }
+
+  .app-container {
+    flex-direction: column; /* Ensure elements stack */
+  }
+}
+
+@media (max-width: 480px) {
+  /* Styles for devices with a width of 480px or less */
+  body {
+    font-size: 14px; /* Reduce base font size */
+  }
+
+  h1 {
+    font-size: 18px; /* Further reduce header size */
+  }
+
+  h2 {
+    font-size: 16px; /* Further adjust h2 size */
+  }
+}
