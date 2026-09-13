@@ -5,7 +5,6 @@ import VideoList  from './components/VideoList/VideoList';
 import './App.css'; 
 import Header from './components/Header/Header'; 
 import Login from './components/Login/Login'; 
-import Sam from './components/Sam/Sam';  
 import About from './components/About/About';  
 import Home from './pages/Home/Home'; 
 import Footer from './components/Footer/Footer';
@@ -21,7 +20,6 @@ function App() {
           <Route path="/VideoUpload" element={<VideoUpload />} /> 
           <Route path="/VideoList" element={<VideoList />} /> 
           <Route path="/video/:id" element={<VideoDetail />} />
-          <Route path="/sam" element={<Sam />} />
           <Route path="/" element={<Home />} /> 
           <Route path="/about" element={<About />} /> {/* About page */}
         </Routes>

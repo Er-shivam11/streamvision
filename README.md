@@ -8,6 +8,8 @@ A full-stack video library built with React and Django REST Framework. Users can
 backend/    Django project, REST API, database configuration, media processing
 frontend/   React application
 ```
+
+```text
 streamvision/
 │
 ├── backend/
@@ -68,10 +70,6 @@ streamvision/
 │   │   │   │   ├── Login.css
 │   │   │   │   └── Login.js
 │   │   │   │
-│   │   │   ├── Sam/
-│   │   │   │   ├── Sam.css
-│   │   │   │   └── Sam.js
-│   │   │   │
 │   │   │   ├── Videolist/
 │   │   │   │   ├── Videolist.css
 │   │   │   │   └── Videolist.js
@@ -96,6 +94,9 @@ streamvision/
 │
 ├── .gitignore
 └── README.md
+```
+
+
 
 ## Features
 
